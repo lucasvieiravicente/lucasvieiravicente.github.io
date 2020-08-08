@@ -10266,3 +10266,7 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
+.col-lg-8 img{
+  width: 40% !important;
+}
