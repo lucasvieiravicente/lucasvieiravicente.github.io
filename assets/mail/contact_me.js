@@ -21,14 +21,14 @@ $(function () {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
             $.ajax({
-                url: "/assets/mail/contact_me.php",
+                url: "https://formspree.io/lucasvieiravicente1@gmail.com",
                 type: "POST",
                 data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
+                    _replayto: email,
+                    email: email,                    
                     message: message,
                 },
+                dataType: "JSON",
                 cache: false,
                 success: function () {
                     // Success message
@@ -39,7 +39,7 @@ $(function () {
                         )
                         .append("</button>");
                     $("#success > .alert-success").append(
-                        "<strong>Your message has been sent. </strong>"
+                        "<strong>Sua mensagem foi enviada. </strong>"
                     );
                     $("#success > .alert-success").append("</div>");
                     //clear all fields
@@ -55,9 +55,9 @@ $(function () {
                         .append("</button>");
                     $("#success > .alert-danger").append(
                         $("<strong>").text(
-                            "Sorry " +
+                            "Desculpa " +
                                 firstName +
-                                ", it seems that my mail server is not responding. Please try again later!"
+                                ", parece que no momento não consigo enviar o e-mail, tente outro contato!"
                         )
                     );
                     $("#success > .alert-danger").append("</div>");
