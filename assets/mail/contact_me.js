@@ -30,8 +30,7 @@ $(function () {
                     senderPhone: phone,            
                     messageEmail: message,
                     subjectEmail: subject
-                },
-                dataType: "JSON",
+                },                
                 cache: false,
                 success: function () {
                     // Success message
