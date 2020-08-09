@@ -24,55 +24,105 @@ $(function () {
 
             let parameters = name + "/" + email + "/" + phone + "/" + message + "/" + subject;
 
-            $.ajax({
-                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/" + parameters,
-                type: "GET",
-                dataType: "JSON",
-                cache: false,
-                success: function () {
-                    // Success message
-                    $("#success").html("<div class='alert alert-success'>");
-                    $("#success > .alert-success")
-                        .html(
-                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;"
-                        )
-                        .append("</button>");
-                    $("#success > .alert-success").append(
-                        "<strong>Sua mensagem foi enviada. </strong>"
-                    );
-                    $("#success > .alert-success").append("</div>");
-                    //clear all fields
-                    $("#contactForm").trigger("reset");
-                },
-                error: function (data) {
-                    // Fail message
-                    let messageError;
+            // $.ajax({
+            //     url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/" + parameters,
+            //     type: "GET",
+            //     dataType: "JSON",
+            //     cache: false,
+            //     success: function () {
+            //         // Success message
+            //         $("#success").html("<div class='alert alert-success'>");
+            //         $("#success > .alert-success")
+            //             .html(
+            //                 "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;"
+            //             )
+            //             .append("</button>");
+            //         $("#success > .alert-success").append(
+            //             "<strong>Sua mensagem foi enviada. </strong>"
+            //         );
+            //         $("#success > .alert-success").append("</div>");
+            //         //clear all fields
+            //         $("#contactForm").trigger("reset");
+            //     },
+            //     error: function (data) {
+            //         // Fail message
+            //         let messageError;
                     
-                    if(data.responseText != null){
-                        messageError = data.responseText;
-                    }
-                    else{
-                        messageError = "Desculpa " + firstName + ", parece que no momento não consigo enviar o e-mail, tente outro contato!";
-                    }
+            //         if(data.responseText != null){
+            //             messageError = data.responseText;
+            //         }
+            //         else{
+            //             messageError = "Desculpa " + firstName + ", parece que no momento não consigo enviar o e-mail, tente outro contato!";
+            //         }
 
-                    $("#success").html("<div class='alert alert-danger'>");
-                    $("#success > .alert-danger")
-                        .html(
-                            "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;"
-                        )
-                        .append("</button>");
-                    $("#success > .alert-danger").append(
-                        $("<strong>").text(messageError)
-                    );
-                    $("#success > .alert-danger").append("</div>");
-                    //clear all fields
-                    $("#contactForm").trigger("reset");
-                },
-                complete: function () {
-                    setTimeout(function () {
-                        $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
-                    }, 1000);
-                },
+            //         $("#success").html("<div class='alert alert-danger'>");
+            //         $("#success > .alert-danger")
+            //             .html(
+            //                 "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;"
+            //             )
+            //             .append("</button>");
+            //         $("#success > .alert-danger").append(
+            //             $("<strong>").text(messageError)
+            //         );
+            //         $("#success > .alert-danger").append("</div>");
+            //         //clear all fields
+            //         $("#contactForm").trigger("reset");
+            //     },
+            //     complete: function () {
+            //         setTimeout(function () {
+            //             $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
+            //         }, 1000);
+            //     },
+            // });
+
+            $.post("https://apiemailslucasvieiravicente.azurewebsites.net",
+            {
+                senderName: name,
+                senderEmail: email,
+                senderPhone: phone,
+                subjectEmail: subject,
+                messageEmail: message
+            }).done(function(){
+                // Success message
+                $("#success").html("<div class='alert alert-success'>");
+                $("#success > .alert-success")
+                    .html(
+                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;"
+                    )
+                    .append("</button>");
+                $("#success > .alert-success").append(
+                    "<strong>Sua mensagem foi enviada. </strong>"
+                );
+                $("#success > .alert-success").append("</div>");
+                //clear all fields
+                $("#contactForm").trigger("reset");
+            }).fail(function(data){
+                // Fail message
+                let messageError;
+                                    
+                if(data.responseText != null){
+                    messageError = data.responseText;
+                }
+                else{
+                    messageError = "Desculpa " + firstName + ", parece que no momento não consigo enviar o e-mail, tente outro contato!";
+                }
+
+                $("#success").html("<div class='alert alert-danger'>");
+                $("#success > .alert-danger")
+                    .html(
+                        "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;"
+                    )
+                    .append("</button>");
+                $("#success > .alert-danger").append(
+                    $("<strong>").text(messageError)
+                );
+                $("#success > .alert-danger").append("</div>");
+                //clear all fields
+                $("#contactForm").trigger("reset");
+            }).complete(function(){
+                setTimeout(function () {
+                    $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
+                }, 1000);
             });
         },
         filter: function () {
