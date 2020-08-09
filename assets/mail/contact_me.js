@@ -32,6 +32,7 @@ $(function () {
                     "subjectEmail": subject
                 },
                 dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function () {
                     // Success message
