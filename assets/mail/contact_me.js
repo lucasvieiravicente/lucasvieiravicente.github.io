@@ -13,6 +13,7 @@ $(function () {
             var email = $("input#email").val();
             var phone = $("input#phone").val();
             var message = $("textarea#message").val();
+            var subject = "Contato de " + name + " (currículo online)"
             var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(" ") >= 0) {
@@ -21,12 +22,14 @@ $(function () {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
             $.ajax({
-                url: "https://formspree.io/lucasvieiravicente1@gmail.com",
+                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail",
                 type: "POST",
                 data: {
-                    _replayto: email,
-                    email: email,                    
-                    message: message,
+                    senderName: name,
+                    senderEmail: email,
+                    senderPhone: phone,            
+                    messageEmail: message,
+                    subjectEmail: subject
                 },
                 dataType: "JSON",
                 cache: false,
@@ -45,8 +48,17 @@ $(function () {
                     //clear all fields
                     $("#contactForm").trigger("reset");
                 },
-                error: function () {
+                error: function (data) {
                     // Fail message
+                    let messageError;
+                    
+                    if(data.responseText != null){
+                        messageError = data.responseText;
+                    }
+                    else{
+                        messageError = "Desculpa " + firstName + ", parece que no momento não consigo enviar o e-mail, tente outro contato!";
+                    }
+
                     $("#success").html("<div class='alert alert-danger'>");
                     $("#success > .alert-danger")
                         .html(
@@ -54,11 +66,7 @@ $(function () {
                         )
                         .append("</button>");
                     $("#success > .alert-danger").append(
-                        $("<strong>").text(
-                            "Desculpa " +
-                                firstName +
-                                ", parece que no momento não consigo enviar o e-mail, tente outro contato!"
-                        )
+                        $("<strong>").text(messageError)
                     );
                     $("#success > .alert-danger").append("</div>");
                     //clear all fields
