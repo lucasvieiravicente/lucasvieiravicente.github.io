@@ -30,6 +30,8 @@ $(function () {
                 messageEmail: message                
             }
 
+            console.log(values);
+
             $.ajax({
                 url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail",
                 type: "POST",
