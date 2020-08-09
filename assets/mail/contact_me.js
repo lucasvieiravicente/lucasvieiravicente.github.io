@@ -22,22 +22,12 @@ $(function () {
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
 
-            var values = {
-                senderName: name,
-                senderEmail: email,
-                senderPhone: phone,  
-                subjectEmail: subject,          
-                messageEmail: message                
-            }
-
-            console.log(values);
+            let parameters = name + "/" + email + "/" + phone + "/" + message + "/" + subject;
 
             $.ajax({
-                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail",
-                type: "POST",
-                data: values,
+                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/" + parameters,
+                type: "GET",
                 dataType: "JSON",
-                contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function () {
                     // Success message
