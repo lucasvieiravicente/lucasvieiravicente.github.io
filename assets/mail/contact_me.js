@@ -25,9 +25,9 @@ $(function () {
             var values = {
                 senderName: name,
                 senderEmail: email,
-                senderPhone: phone,            
-                messageEmail: message,
-                subjectEmail: subject
+                senderPhone: phone,  
+                subjectEmail: subject,          
+                messageEmail: message                
             }
 
             $.ajax({
