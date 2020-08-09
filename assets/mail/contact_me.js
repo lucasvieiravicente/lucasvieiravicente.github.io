@@ -25,12 +25,13 @@ $(function () {
                 url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail",
                 type: "POST",
                 data: {
-                    senderName: name,
-                    senderEmail: email,
-                    senderPhone: phone,            
-                    messageEmail: message,
-                    subjectEmail: subject
-                },                
+                    "senderName": name,
+                    "senderEmail": email,
+                    "senderPhone": phone,            
+                    "messageEmail": message,
+                    "subjectEmail": subject
+                },
+                dataType: "JSON",
                 cache: false,
                 success: function () {
                     // Success message
