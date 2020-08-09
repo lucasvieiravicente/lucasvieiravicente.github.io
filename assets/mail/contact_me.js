@@ -34,7 +34,8 @@ $(function () {
                 url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail",
                 type: "POST",
                 data: values,
-                dataType: "JSON",            
+                dataType: "JSON",
+                contentType: "application/json; charset=utf-8",
                 cache: false,
                 success: function () {
                     // Success message
