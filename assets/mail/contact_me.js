@@ -26,8 +26,7 @@ $(function () {
 
             $.ajax({
                 url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/",                
-                type: "POST",
-                contentType: "application/json",
+                type: "POST",                
                 dataType: "JSON",
                 data: {
                     senderName: name,
