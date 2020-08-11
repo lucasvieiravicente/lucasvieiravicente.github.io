@@ -25,16 +25,9 @@ $(function () {
             let parameters = name + "/" + email + "/" + phone + "/" + message + "/" + subject;
 
             $.ajax({
-                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/",                
-                type: "POST",                
+                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/" + parameters,                
+                type: "GET",                
                 dataType: "JSON",
-                data: {
-                    senderName: name,
-                    senderEmail: email,
-                    senderPhone: phone,
-                    subjectEmail: subject,
-                    messageEmail: message
-                },
                 cache: false,
                 success: function () {
                     // Success message
