@@ -9,20 +9,20 @@ $(function () {
         submitSuccess: function ($form, event) {
             event.preventDefault(); // prevent default submit behaviour
             // get values from FORM
-            var name = $("input#name").val();
-            var email = $("input#email").val();
-            var phonenumber = $("input#phone").val();
-            var body = $("textarea#message").val();
-            var subject = "Contato de " + name + " (Github.IO)"
+            let values = {
+                name = $("input#name").val(),
+                email = $("input#email").val(),
+                phonenumber = $("input#phone").val(),
+                body = $("textarea#message").val(),
+                subject = "Contato de " + name + " (Github.IO)"
+            }            
             var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(" ") >= 0) {
                 firstName = name.split(" ").slice(0, -1).join(" ");
             }
             $this = $("#sendMessageButton");
-            $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
-            
-            let values = { name, email, phonenumber, subject, body };
+            $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages                    
 
             $.ajax({
                 url: "https://webapilucas.azurewebsites.net/SendEmail/",              
