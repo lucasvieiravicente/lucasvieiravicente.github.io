@@ -11,9 +11,9 @@ $(function () {
             // get values from FORM
             var name = $("input#name").val();
             var email = $("input#email").val();
-            var phone = $("input#phone").val();
-            var message = $("textarea#message").val();
-            var subject = "Contato de " + name + " (currículo online)"
+            var phonenumber = $("input#phone").val();
+            var body = $("textarea#message").val();
+            var subject = "Contato de " + name + " (Github.IO)"
             var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(" ") >= 0) {
@@ -21,13 +21,14 @@ $(function () {
             }
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
-
-            let parameters = name + "/" + email + "/" + phone + "/" + message + "/" + subject;
+            
+            let values = { name, email, phonenumber, subject, body };
 
             $.ajax({
-                url: "https://apiemailslucasvieiravicente.azurewebsites.net/SendEmail/" + parameters,                
-                type: "GET",                
-                dataType: "JSON",
+                url: "https://webapilucas.azurewebsites.net/SendEmail/",              
+                type: "POST",          
+                data: values,      
+                dataType: "application/json",
                 cache: false,
                 success: function () {
                     // Success message
