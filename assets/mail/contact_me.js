@@ -28,8 +28,7 @@ $(function () {
                 url: "https://webapilucas.azurewebsites.net/SendEmail/",              
                 type: "POST",          
                 data: JSON.stringify(values),
-                contentType: "application/json",      
-                dataType: "application/json",
+                contentType: "application/json",                      
                 cache: false,
             }).done(function(data){
                 // Success message
@@ -40,7 +39,7 @@ $(function () {
                     )
                     .append("</button>");
                 $("#success > .alert-success").append(
-                    "<strong>" + data.responseText + "</strong>"
+                    "<strong>" + data + "</strong>"
                 );
                 $("#success > .alert-success").append("</div>");                
             }).fail(function(data){
@@ -49,6 +48,9 @@ $(function () {
                                 
                 if(data.responseText != null){
                     messageError = data.responseText;
+                }
+                else if(data != null){
+                    messageError = data;
                 }
                 else{
                     messageError = "Desculpa " + firstName + ", parece que no momento não consigo enviar o e-mail, tente outro contato!";
