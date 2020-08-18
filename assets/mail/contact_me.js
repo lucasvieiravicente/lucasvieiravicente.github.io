@@ -16,10 +16,10 @@ $(function () {
                 body: $("textarea#message").val(),
                 subject: "Contato de " + name + " (Github.IO)"
             }            
-            var firstName = name; // For Success/Failure Message
+            var firstName = $("input#name").val(); // For Success/Failure Message
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(" ") >= 0) {
-                firstName = name.split(" ").slice(0, -1).join(" ");
+                firstName = $("input#name").val().split(" ").slice(0, -1).join(" ");
             }
             $this = $("#sendMessageButton");
             $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages                    
@@ -27,7 +27,8 @@ $(function () {
             $.ajax({
                 url: "https://webapilucas.azurewebsites.net/SendEmail/",              
                 type: "POST",          
-                data: values,      
+                data: JSON.stringify(values),
+                contentType: "application/json",      
                 dataType: "application/json",
                 cache: false,
                 success: function () {
