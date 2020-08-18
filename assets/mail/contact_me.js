@@ -10,11 +10,11 @@ $(function () {
             event.preventDefault(); // prevent default submit behaviour
             // get values from FORM
             let values = {
-                name = $("input#name").val(),
-                email = $("input#email").val(),
-                phonenumber = $("input#phone").val(),
-                body = $("textarea#message").val(),
-                subject = "Contato de " + name + " (Github.IO)"
+                name: $("input#name").val(),
+                email: $("input#email").val(),
+                phonenumber: $("input#phone").val(),
+                body: $("textarea#message").val(),
+                subject: "Contato de " + name + " (Github.IO)"
             }            
             var firstName = name; // For Success/Failure Message
             // Check for white space in name for Success/Fail message
