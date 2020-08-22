@@ -8,14 +8,12 @@ $(function () {
         },
         submitSuccess: function ($form, event) {
             event.preventDefault(); // prevent default submit behaviour
-            // get values from FORM
-            let values = {
-                name: $("input#name").val(),
-                email: $("input#email").val(),
-                phonenumber: $("input#phone").val(),
-                body: $("textarea#message").val(),
-                subject: "Contato de " + name + " (Github.IO)"
-            }            
+            // get values from FORM       
+            let name = $("input#name").val();
+            let email = $("input#email").val();
+            let phonenumber = $("input#phone").val();
+            let body = $("textarea#message").val();
+            let subject = "Contato de " + name + " (Github.IO)";            
             var firstName = $("input#name").val(); // For Success/Failure Message
             // Check for white space in name for Success/Fail message
             if (firstName.indexOf(" ") >= 0) {
@@ -27,7 +25,7 @@ $(function () {
             $.ajax({
                 url: "https://webapilucas.azurewebsites.net/SendEmail/",              
                 type: "POST",          
-                data: JSON.stringify(values),
+                data: { name, email, phonenumber, body, subject },
                 contentType: "application/json",                      
                 cache: false,
             }).done(function(data){
@@ -48,10 +46,7 @@ $(function () {
                                 
                 if(data.responseText != null){
                     messageError = data.responseText;
-                }
-                else if(data != null){
-                    messageError = data;
-                }
+                }                
                 else{
                     messageError = "Desculpa " + firstName + ", parece que no momento não consigo enviar o e-mail, tente outro contato!";
                 }
