@@ -20,12 +20,12 @@ $(function () {
                 firstName = $("input#name").val().split(" ").slice(0, -1).join(" ");
             }
             $this = $("#sendMessageButton");
-            $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages                    
+            $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages                                
 
             $.ajax({
                 url: "https://webapilucas.azurewebsites.net/SendEmail/",              
                 type: "POST",          
-                data: { name, email, phonenumber, body, subject },
+                data: JSON.stringify({ name, email, phonenumber, body, subject }),
                 contentType: "application/json",                      
                 cache: false,
             }).done(function(data){
